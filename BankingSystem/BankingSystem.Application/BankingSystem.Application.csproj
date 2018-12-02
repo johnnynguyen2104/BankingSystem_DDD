@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankingSystem.Domain\BankingSystem.Domain.csproj" />
+    <ProjectReference Include="..\BankingSystem.Persistence\BankingSystem.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BankAccounts\Models\" />
+    <Folder Include="BankAccounts\Validations\" />
+    <Folder Include="BankAccounts\Queries\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="Transactions\Models\" />
+    <Folder Include="Transactions\Commands\" />
+    <Folder Include="Transactions\Validations\" />
+    <Folder Include="Transactions\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="5.1.0" />
+  </ItemGroup>
+
+</Project>
