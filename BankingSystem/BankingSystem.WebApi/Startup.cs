@@ -26,7 +26,7 @@ namespace BankingSystem.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BankingSystemDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("NorthwindDatabase")));
+                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 
