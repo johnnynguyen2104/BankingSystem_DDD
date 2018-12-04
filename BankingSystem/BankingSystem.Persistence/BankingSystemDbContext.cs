@@ -14,12 +14,15 @@ namespace BankingSystem.Persistence
 
         DbSet<BankAccount> BankAccounts { get; set; }
 
-        DbSet<Transaction> Transactions { get; set; }
+        DbSet<AccountTransaction> Transactions { get; set; }
+
+        DbSet<AccountStatement> Statements { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BankAccountConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountStatementConfiguration());
         }
     }
 }

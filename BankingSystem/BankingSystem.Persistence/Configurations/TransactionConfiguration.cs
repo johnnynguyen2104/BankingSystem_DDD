@@ -8,9 +8,9 @@ using System.Text;
 
 namespace BankingSystem.Persistence.Configurations
 {
-    public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
+    public class TransactionConfiguration : IEntityTypeConfiguration<AccountTransaction>
     {
-        public void Configure(EntityTypeBuilder<Transaction> builder)
+        public void Configure(EntityTypeBuilder<AccountTransaction> builder)
         {
 
             var converter = new EnumToStringConverter<ActionCode>();

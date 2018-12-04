@@ -4,13 +4,11 @@ using System.Text;
 
 namespace BankingSystem.Domain.Entities
 {
-    public class BankAccount
-    {
-        public int AccountId { get; set; }
-
+    public class BankAccount : AggregateRoot
+    { 
         public string AccountNumber { get; set; }
 
-        public decimal Amount { get; set; }
+        public decimal CurrentBalance { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -18,6 +16,8 @@ namespace BankingSystem.Domain.Entities
 
         public string Currency { get; set; }
 
-        public virtual ICollection<Transaction> Histories { get; set; }
+        public virtual ICollection<AccountTransaction> Transactions { get; set; }
+
+        public virtual ICollection<AccountStatement> Statements { get; set; }
     }
 }

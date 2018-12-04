@@ -9,7 +9,7 @@ namespace BankingSystem.Persistence.Configurations
         public void Configure(EntityTypeBuilder<BankAccount> builder)
         {
             builder
-              .HasMany(a => a.Histories)
+              .HasMany(a => a.Transactions)
               .WithOne(a => a.Account)
               .IsRequired()
               .HasForeignKey(a => a.AccountId);
