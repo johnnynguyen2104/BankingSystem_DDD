@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using BankingSystem.Common.Exceptions;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace BankingSystem.Application.Exceptions
 {
-    public class ValidationException : Exception
+    public class ValidationException : BankingException
     {
         public ValidationException()
             : base("One or more validation failures have occurred.")
