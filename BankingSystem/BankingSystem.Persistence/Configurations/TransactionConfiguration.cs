@@ -12,7 +12,7 @@ namespace BankingSystem.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<AccountTransaction> builder)
         {
-
+            builder.Property(a => a.Id).ValueGeneratedOnAdd();
             var converter = new EnumToStringConverter<ActionCode>();
 
             builder

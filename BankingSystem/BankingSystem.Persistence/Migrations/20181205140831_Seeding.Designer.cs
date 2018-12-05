@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingSystem.Persistence.Migrations
 {
     [DbContext(typeof(BankingSystemDbContext))]
-    [Migration("20181205112824_FirstInit")]
-    partial class FirstInit
+    [Migration("20181205140831_Seeding")]
+    partial class Seeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,14 +23,17 @@ namespace BankingSystem.Persistence.Migrations
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.AccountStatement", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AccountId");
+                    b.Property<int>("AccountId");
 
                     b.Property<decimal>("ClosingBalance");
 
-                    b.Property<DateTime>("StatementDate");
+                    b.Property<DateTime>("StatementDateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("StatementDetails")
                         .HasMaxLength(50);
@@ -40,14 +43,41 @@ namespace BankingSystem.Persistence.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Statements");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountId = 1,
+                            ClosingBalance = 0m,
+                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatementDetails = "This statement on Dec, 2018"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountId = 2,
+                            ClosingBalance = 0m,
+                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatementDetails = "This statement on Dec, 2018"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountId = 3,
+                            ClosingBalance = 0m,
+                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatementDetails = "This statement on Dec, 2018"
+                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.AccountTransaction", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AccountId");
+                    b.Property<int>("AccountId");
 
                     b.Property<string>("Action")
                         .IsRequired();
@@ -56,19 +86,51 @@ namespace BankingSystem.Persistence.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<DateTime>("TransactionDatetime");
+                    b.Property<DateTime>("TransactionDatetime")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountId = 1,
+                            Action = "Deposit",
+                            Amount = 100m,
+                            Note = "This is the initial deposit.",
+                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountId = 2,
+                            Action = "Deposit",
+                            Amount = 200m,
+                            Note = "This is the initial deposit.",
+                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountId = 3,
+                            Action = "Deposit",
+                            Amount = 300m,
+                            Note = "This is the initial deposit.",
+                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.BankAccount", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AccountNumber")
                         .HasMaxLength(30);
@@ -97,7 +159,7 @@ namespace BankingSystem.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("669afddc-031c-4bf9-a3a9-f76d6d95ccfc"),
+                            Id = 1,
                             AccountNumber = "4111111111111111",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Currency = "THB",
@@ -106,19 +168,19 @@ namespace BankingSystem.Persistence.Migrations
                         },
                         new
                         {
-                            Id = new Guid("891db200-b25d-4dd4-9acc-d29a43818221"),
+                            Id = 2,
                             AccountNumber = "4222222222222222",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Currency = "USD",
+                            Currency = "THB",
                             IsActive = true,
                             LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
-                            Id = new Guid("1f6bc16e-9505-469d-b8f0-e61785037fce"),
+                            Id = 3,
                             AccountNumber = "4333333333333333",
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Currency = "EUR",
+                            Currency = "THB",
                             IsActive = true,
                             LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

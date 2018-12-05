@@ -6,6 +6,6 @@ namespace BankingSystem.Domain.Entities
 {
     public abstract class AggregateRoot
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
     }
 }

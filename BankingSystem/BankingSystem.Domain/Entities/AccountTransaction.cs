@@ -13,7 +13,7 @@ namespace BankingSystem.Domain.Entities
 
         public string Note { get; set; }
 
-        public Guid AccountId { get; set; }
+        public int AccountId { get; set; }
 
         public DateTime TransactionDatetime { get; set; }
 

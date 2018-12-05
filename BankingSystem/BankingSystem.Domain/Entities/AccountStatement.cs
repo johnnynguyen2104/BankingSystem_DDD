@@ -6,7 +6,7 @@ namespace BankingSystem.Domain.Entities
 {
     public class AccountStatement : AggregateRoot
     {
-        public Guid AccountId { get; set; }
+        public int AccountId { get; set; }
 
         public DateTime StatementDateTime { get; set; }
 

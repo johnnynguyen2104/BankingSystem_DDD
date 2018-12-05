@@ -11,6 +11,8 @@ namespace BankingSystem.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<AccountStatement> builder)
         {
+
+            builder.Property(a => a.Id).ValueGeneratedOnAdd();
             builder.HasOne(a => a.Account)
                 .WithMany(a => a.Statements)
                 .HasForeignKey(a => a.AccountId)

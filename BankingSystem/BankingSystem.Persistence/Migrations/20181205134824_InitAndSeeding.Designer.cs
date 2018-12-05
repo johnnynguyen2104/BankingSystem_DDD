@@ -4,14 +4,16 @@ using BankingSystem.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BankingSystem.Persistence.Migrations
 {
     [DbContext(typeof(BankingSystemDbContext))]
-    partial class BankingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181205134824_InitAndSeeding")]
+    partial class InitAndSeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,32 +43,6 @@ namespace BankingSystem.Persistence.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Statements");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountId = 1,
-                            ClosingBalance = 0m,
-                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatementDetails = "This statement on Dec, 2018"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountId = 2,
-                            ClosingBalance = 0m,
-                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatementDetails = "This statement on Dec, 2018"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountId = 3,
-                            ClosingBalance = 0m,
-                            StatementDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatementDetails = "This statement on Dec, 2018"
-                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.AccountTransaction", b =>
@@ -93,35 +69,6 @@ namespace BankingSystem.Persistence.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountId = 1,
-                            Action = "Deposit",
-                            Amount = 100m,
-                            Note = "This is the initial deposit.",
-                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountId = 2,
-                            Action = "Deposit",
-                            Amount = 200m,
-                            Note = "This is the initial deposit.",
-                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountId = 3,
-                            Action = "Deposit",
-                            Amount = 300m,
-                            Note = "This is the initial deposit.",
-                            TransactionDatetime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.BankAccount", b =>
@@ -153,35 +100,6 @@ namespace BankingSystem.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BankAccounts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountNumber = "4111111111111111",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Currency = "THB",
-                            IsActive = true,
-                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountNumber = "4222222222222222",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Currency = "THB",
-                            IsActive = true,
-                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountNumber = "4333333333333333",
-                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Currency = "THB",
-                            IsActive = true,
-                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.AccountStatement", b =>

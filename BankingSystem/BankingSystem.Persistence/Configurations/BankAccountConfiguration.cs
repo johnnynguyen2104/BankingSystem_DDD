@@ -8,6 +8,8 @@ namespace BankingSystem.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<BankAccount> builder)
         {
+            builder.Property(a => a.Id).ValueGeneratedOnAdd();
+
             builder
               .HasMany(a => a.Transactions)
               .WithOne(a => a.Account)
