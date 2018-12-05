@@ -11,19 +11,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8706E60
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{86082802-3B48-49EC-B208-22492C1FF1CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Domain", "BankingSystem.Domain\BankingSystem.Domain.csproj", "{CFA73262-4EF9-49C2-AEF8-2F127BB4A0DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.Domain", "BankingSystem.Domain\BankingSystem.Domain.csproj", "{CFA73262-4EF9-49C2-AEF8-2F127BB4A0DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Application", "BankingSystem.Application\BankingSystem.Application.csproj", "{F8AA9588-657A-4971-B482-E2A85A4D47BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.Application", "BankingSystem.Application\BankingSystem.Application.csproj", "{F8AA9588-657A-4971-B482-E2A85A4D47BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.WebApi", "BankingSystem.WebApi\BankingSystem.WebApi.csproj", "{C3AA83D0-4510-425C-A62A-A39AF96410FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.WebApi", "BankingSystem.WebApi\BankingSystem.WebApi.csproj", "{C3AA83D0-4510-425C-A62A-A39AF96410FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Infrastructure", "BankingSystem.Infrastructure\BankingSystem.Infrastructure.csproj", "{2E19A3D3-1FFF-4899-9873-DBB3D8C3FDF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.Infrastructure", "BankingSystem.Infrastructure\BankingSystem.Infrastructure.csproj", "{2E19A3D3-1FFF-4899-9873-DBB3D8C3FDF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Persistence", "BankingSystem.Persistence\BankingSystem.Persistence.csproj", "{001F0ECE-202D-4035-82A0-BFF0B55441A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.Persistence", "BankingSystem.Persistence\BankingSystem.Persistence.csproj", "{001F0ECE-202D-4035-82A0-BFF0B55441A9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{62D0A4C4-36D4-4E63-BBB6-CAE5991D8BC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Common", "BankingSystem.Common\BankingSystem.Common.csproj", "{B305C9C4-8D2D-4E7A-B29E-26C847208EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankingSystem.Common", "BankingSystem.Common\BankingSystem.Common.csproj", "{B305C9C4-8D2D-4E7A-B29E-26C847208EAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankingSystem.Test", "BankingSystem.Test\BankingSystem.Test.csproj", "{A29B72E3-C4FD-4956-B6B7-651BC8D43F54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{B305C9C4-8D2D-4E7A-B29E-26C847208EAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B305C9C4-8D2D-4E7A-B29E-26C847208EAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B305C9C4-8D2D-4E7A-B29E-26C847208EAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29B72E3-C4FD-4956-B6B7-651BC8D43F54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29B72E3-C4FD-4956-B6B7-651BC8D43F54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29B72E3-C4FD-4956-B6B7-651BC8D43F54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29B72E3-C4FD-4956-B6B7-651BC8D43F54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{2E19A3D3-1FFF-4899-9873-DBB3D8C3FDF4} = {86082802-3B48-49EC-B208-22492C1FF1CF}
 		{001F0ECE-202D-4035-82A0-BFF0B55441A9} = {86082802-3B48-49EC-B208-22492C1FF1CF}
 		{B305C9C4-8D2D-4E7A-B29E-26C847208EAE} = {62D0A4C4-36D4-4E63-BBB6-CAE5991D8BC1}
+		{A29B72E3-C4FD-4956-B6B7-651BC8D43F54} = {D8706E60-02D5-4944-A5C5-3D24DC422E10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F3B3235-147C-4601-A463-7836399BE5F4}

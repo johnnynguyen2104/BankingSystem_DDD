@@ -21,7 +21,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NLog.Extensions.Logging;
 using NLog.Web;
-using MediatR;
 using BankingSystem.WebApi.Middlewares;
 using BankingSystem.Application.BankAccounts.Commands;
 
@@ -73,7 +72,9 @@ namespace BankingSystem.WebApi
             loggerFactory.AddNLog();
 
             //add NLog.Web
+#pragma warning disable CS0618 // Type or member is obsolete
             app.AddNLogWeb();
+#pragma warning restore CS0618 // Type or member is obsolete
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
