@@ -8,7 +8,7 @@ namespace BankingSystem.Domain.Entities
     {
         public Guid AccountId { get; set; }
 
-        public DateTime StatementDate { get; set; }
+        public DateTime StatementDateTime { get; set; }
 
         public string StatementDetails { get; set; }
 

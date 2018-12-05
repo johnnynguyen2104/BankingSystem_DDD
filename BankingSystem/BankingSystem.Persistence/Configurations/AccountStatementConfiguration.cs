@@ -17,7 +17,9 @@ namespace BankingSystem.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(a => a.StatementDetails).HasMaxLength(50);
-            
+
+            builder.Property(a => a.StatementDateTime)
+                .HasDefaultValueSql("getdate()");
         }
     }
 }

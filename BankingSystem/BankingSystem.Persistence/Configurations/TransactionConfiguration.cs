@@ -18,6 +18,10 @@ namespace BankingSystem.Persistence.Configurations
             builder
                 .Property(e => e.Action)
                 .HasConversion(converter);
+
+            builder
+                .Property(e => e.TransactionDatetime)
+                .HasDefaultValueSql("getdate()");
         }
     }
 }

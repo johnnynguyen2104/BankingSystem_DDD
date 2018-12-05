@@ -22,7 +22,14 @@ namespace BankingSystem.Persistence.Configurations
 
             builder
                 .Property(p => p.RowVersion)
-                .IsConcurrencyToken();
+                .IsRowVersion();
+
+            builder.Property(a => a.CreatedDate)
+                .HasDefaultValueSql("getdate()");
+
+            builder.Property(a => a.LastActivityDate)
+               .HasDefaultValueSql("getdate()");
+
 
         }
     }
