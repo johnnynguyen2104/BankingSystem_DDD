@@ -1,4 +1,6 @@
 ﻿using BankingSystem.Application.Interfaces;
+using BankingSystem.Infrastructure.Exceptions;
+using BankingSystem.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +12,27 @@ namespace BankingSystem.Infrastructure
     {
         public Task<decimal> GetRates(string baseCurrency, string exchangeCurrency)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+
+                var mockData = new CurrencyInfo()
+                {
+                    BaseCurrency = "THB",
+                    Date = DateTime.Now,
+                    Rates = new Dictionary<string, decimal>()
+                {
+                    { "USD", 33 },
+                    { "EUR", 40 }
+
+                }
+                };
+
+                if (!mockData.Rates.ContainsKey(exchangeCurrency))
+                {
+                    throw new InvalidCurrencyException($"Invalid Currency {exchangeCurrency}");
+                }
+                return mockData.Rates[exchangeCurrency];
+            });
         }
     }
 }

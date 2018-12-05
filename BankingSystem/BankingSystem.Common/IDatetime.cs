@@ -2,7 +2,7 @@
 
 namespace BankingSystem.Common
 {
-    public interface IDatetime
+    public interface IDateTime
     {
         DateTime Now { get; }
 

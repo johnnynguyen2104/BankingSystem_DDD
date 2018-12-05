@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BankingSystem.Infrastructure
 {
-    public class MachineDateTime : IDatetime
+    public class MachineDateTime : IDateTime
     {
         public DateTime Now => DateTime.Now;
 
