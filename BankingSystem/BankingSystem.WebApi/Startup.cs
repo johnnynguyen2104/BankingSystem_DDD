@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BankingSystem.Application.Infrastructure;
 using BankingSystem.Application.Interfaces;
+using BankingSystem.Common;
 using BankingSystem.Infrastructure;
 using BankingSystem.Persistence;
+using MediatR;
+using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +34,17 @@ namespace BankingSystem.WebApi
             services.AddMvc();
             services.AddDbContext<BankingSystemDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //MediatR Pipeline
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
+            services.AddTransient(typeof(IRequestPreProcessor<>), typeof(RequestLogger<>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+            //services.AddMediatR(typeof(GetProductQueryHandler).GetTypeInfo().Assembly);
+
+            //Infrastructure
             services.AddTransient<ICurrencyService, CurrencyService>();
+            services.AddTransient<IDatetime, MachineDateTime>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +55,22 @@ namespace BankingSystem.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path = "/api";
+                settings.DocumentPath = "/api/specification.json";
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
         }
     }
 }
