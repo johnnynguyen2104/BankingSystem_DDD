@@ -4,14 +4,16 @@ using BankingSystem.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BankingSystem.Persistence.Migrations
 {
     [DbContext(typeof(BankingSystemDbContext))]
-    partial class BankingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181205043038_AddColumnsToAccount")]
+    partial class AddColumnsToAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,8 +82,7 @@ namespace BankingSystem.Persistence.Migrations
 
                     b.Property<DateTime>("LastActivityDate");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken();
+                    b.Property<byte[]>("RowVersion");
 
                     b.HasKey("Id");
 

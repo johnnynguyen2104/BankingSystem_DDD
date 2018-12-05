@@ -8,13 +8,15 @@ namespace BankingSystem.Domain.Entities
     { 
         public string AccountNumber { get; set; }
 
-        public decimal CurrentBalance { get; set; }
-
         public bool IsActive { get; set; }
 
         public byte[] RowVersion { get; set; }
 
         public string Currency { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime LastActivityDate { get; set; }
 
         public virtual ICollection<AccountTransaction> Transactions { get; set; }
 
