@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
+using BankingSystem.Application.BankAccounts.Queries;
 using BankingSystem.Application.Infrastructure;
 using BankingSystem.Application.Interfaces;
 using BankingSystem.Common;
@@ -16,6 +19,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
+using NLog.Web;
+using MediatR;
+using BankingSystem.WebApi.Middlewares;
+using BankingSystem.Application.BankAccounts.Commands;
 
 namespace BankingSystem.WebApi
 {
@@ -40,30 +48,43 @@ namespace BankingSystem.WebApi
             services.AddTransient(typeof(IRequestPreProcessor<>), typeof(RequestLogger<>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-            //services.AddMediatR(typeof(GetProductQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(InquiryByAccountNumberQueryHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(DepositCommandHandler).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(WithdrawCommandHandler).GetTypeInfo().Assembly);
 
             //Infrastructure
             services.AddTransient<ICurrencyService, CurrencyService>();
-            services.AddTransient<IDatetime, MachineDateTime>();
+            services.AddTransient<IDateTime, MachineDateTime>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app
+            , IHostingEnvironment env
+            , ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
+            env.ConfigureNLog("nlog.config");
+
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
+
+            //add NLog.Web
+            app.AddNLogWeb();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
 
             app.UseSwaggerUi3(settings =>
             {
                 settings.Path = "/api";
                 settings.DocumentPath = "/api/specification.json";
             });
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseMvc(routes =>
             {
