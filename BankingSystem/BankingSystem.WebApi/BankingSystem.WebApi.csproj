@@ -18,6 +18,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankingSystem.Application\BankingSystem.Application.csproj" />
+    <ProjectReference Include="..\BankingSystem.Common\BankingSystem.Common.csproj" />
+    <ProjectReference Include="..\BankingSystem.Infrastructure\BankingSystem.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
