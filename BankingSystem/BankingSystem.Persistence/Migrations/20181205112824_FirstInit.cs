@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BankingSystem.Persistence.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class FirstInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +13,11 @@ namespace BankingSystem.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     AccountNumber = table.Column<string>(maxLength: 30, nullable: true),
-                    CurrentBalance = table.Column<decimal>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    RowVersion = table.Column<byte[]>(nullable: true),
-                    Currency = table.Column<string>(maxLength: 10, nullable: true)
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    Currency = table.Column<string>(maxLength: 10, nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()"),
+                    LastActivityDate = table.Column<DateTime>(nullable: false, defaultValueSql: "getdate()")
                 },
                 constraints: table =>
                 {
@@ -65,6 +66,8 @@ namespace BankingSystem.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+          
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statements_AccountId",

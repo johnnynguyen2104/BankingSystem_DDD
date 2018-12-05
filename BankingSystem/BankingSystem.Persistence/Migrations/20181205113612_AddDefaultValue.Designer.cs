@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingSystem.Persistence.Migrations
 {
     [DbContext(typeof(BankingSystemDbContext))]
-    [Migration("20181205043038_AddColumnsToAccount")]
-    partial class AddColumnsToAccount
+    [Migration("20181205113612_AddDefaultValue")]
+    partial class AddDefaultValue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,7 +30,9 @@ namespace BankingSystem.Persistence.Migrations
 
                     b.Property<decimal>("ClosingBalance");
 
-                    b.Property<DateTime>("StatementDate");
+                    b.Property<DateTime>("StatementDateTime")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("StatementDetails")
                         .HasMaxLength(50);
@@ -56,7 +58,9 @@ namespace BankingSystem.Persistence.Migrations
 
                     b.Property<string>("Note");
 
-                    b.Property<DateTime>("TransactionDatetime");
+                    b.Property<DateTime>("TransactionDatetime")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.HasKey("Id");
 
@@ -73,16 +77,22 @@ namespace BankingSystem.Persistence.Migrations
                     b.Property<string>("AccountNumber")
                         .HasMaxLength(30);
 
-                    b.Property<DateTime>("CreatedDate");
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Currency")
                         .HasMaxLength(10);
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<DateTime>("LastActivityDate");
+                    b.Property<DateTime>("LastActivityDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<byte[]>("RowVersion");
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
 

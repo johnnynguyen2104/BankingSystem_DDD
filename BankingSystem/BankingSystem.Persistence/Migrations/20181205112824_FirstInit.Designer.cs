@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankingSystem.Persistence.Migrations
 {
     [DbContext(typeof(BankingSystemDbContext))]
-    [Migration("20181205051614_RowVersionAsToken")]
-    partial class RowVersionAsToken
+    [Migration("20181205112824_FirstInit")]
+    partial class FirstInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,21 +73,55 @@ namespace BankingSystem.Persistence.Migrations
                     b.Property<string>("AccountNumber")
                         .HasMaxLength(30);
 
-                    b.Property<DateTime>("CreatedDate");
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Currency")
                         .HasMaxLength(10);
 
                     b.Property<bool>("IsActive");
 
-                    b.Property<DateTime>("LastActivityDate");
+                    b.Property<DateTime>("LastActivityDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken();
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
 
                     b.ToTable("BankAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("669afddc-031c-4bf9-a3a9-f76d6d95ccfc"),
+                            AccountNumber = "4111111111111111",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Currency = "THB",
+                            IsActive = true,
+                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("891db200-b25d-4dd4-9acc-d29a43818221"),
+                            AccountNumber = "4222222222222222",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Currency = "USD",
+                            IsActive = true,
+                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = new Guid("1f6bc16e-9505-469d-b8f0-e61785037fce"),
+                            AccountNumber = "4333333333333333",
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Currency = "EUR",
+                            IsActive = true,
+                            LastActivityDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BankingSystem.Domain.Entities.AccountStatement", b =>
