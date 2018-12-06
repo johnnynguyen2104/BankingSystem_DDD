@@ -50,17 +50,23 @@ namespace BankingSystem.Application.BankAccounts.Commands
 
                 if (rates <= 0)
                 {
-                    throw new WithdrawFailException($"Invalid rates {rates}.");
+                    throw new DepositFailException($"Invalid Currency {request.Currency}");
                 }
             }
 
             var actualAmout = (request.Amount * rates);
 
+            if (actualAmout <= 0)
+            {
+                throw new DepositFailException($"Invalid actual amount {actualAmout}");
+            }
+
             _bankingSystemDbContext.Transactions.Add(new AccountTransaction()
             {
                 AccountId = account.Id,
                 Amount = actualAmout,
-                Action = ActionCode.Deposit
+                Action = ActionCode.Deposit,
+                TransactionDatetime = _machineDateTime.Now
             });
 
             account.LastActivityDate = _machineDateTime.Now;

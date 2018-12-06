@@ -29,7 +29,7 @@ namespace BankingSystem.Infrastructure
 
                 if (!mockData.Rates.ContainsKey(exchangeCurrency))
                 {
-                    throw new InvalidCurrencyException($"Invalid Currency {exchangeCurrency}");
+                    return 0;
                 }
                 return mockData.Rates[exchangeCurrency];
             });

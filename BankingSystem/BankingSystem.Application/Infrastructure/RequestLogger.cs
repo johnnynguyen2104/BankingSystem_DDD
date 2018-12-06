@@ -21,8 +21,6 @@ namespace BankingSystem.Application.Infrastructure
         {
             var name = typeof(TRequest).Name;
 
-            // TODO: Add User Details
-
             _logger.LogInformation("Northwind Request: {Name} {@Request}", name, request);
 
             return Task.CompletedTask;

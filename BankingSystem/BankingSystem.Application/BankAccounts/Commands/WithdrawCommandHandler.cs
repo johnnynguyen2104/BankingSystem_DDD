@@ -38,7 +38,7 @@ namespace BankingSystem.Application.BankAccounts.Commands
         {
             var account = _accountRepository.GetAccountByAccountNumber(request.AccountNumber);
 
-            if (account != null)
+            if (account == null)
             {
                 throw new WithdrawFailException($"No Account was found by account numbe - {request.AccountNumber}");
             }
@@ -51,12 +51,17 @@ namespace BankingSystem.Application.BankAccounts.Commands
 
                 if (rates <= 0)
                 {
-                    throw new WithdrawFailException($"Invalid rates {rates}.");
+                    throw new WithdrawFailException($"Invalid Currency {request.Currency}.");
                 }
             }
 
             var currentBalance = _accountRepository.GetCurrentBalanceByAccountId(account);
             var actualAmout = (request.Amount * rates);
+
+            if (actualAmout <= 0)
+            {
+                throw new WithdrawFailException($"Invalid actual amount after exchanged ({actualAmout}).");
+            }
 
             if (actualAmout > currentBalance)
             {
@@ -66,7 +71,8 @@ namespace BankingSystem.Application.BankAccounts.Commands
             _bankingSystemDbContext.Transactions.Add(new AccountTransaction() {
                 AccountId = account.Id,
                 Amount = actualAmout,
-                Action = ActionCode.Withdraw
+                Action = ActionCode.Withdraw,
+                TransactionDatetime = _machineDateTime.Now
             });
 
             account.LastActivityDate = _machineDateTime.Now;

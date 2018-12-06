@@ -10,6 +10,7 @@ namespace BankingSystem.Application.BankAccounts.Validations
     {
         public WithdrawCommandValidation()
         {
+
             RuleFor(a => a.AccountNumber)
                 .MaximumLength(30)
                 .NotEmpty();

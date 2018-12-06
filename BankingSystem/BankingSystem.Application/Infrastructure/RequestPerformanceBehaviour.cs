@@ -33,9 +33,8 @@ namespace BankingSystem.Application.Infrastructure
             {
                 var name = typeof(TRequest).Name;
 
-                // TODO: Add User Details
 
-                _logger.LogWarning("Northwind Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, _timer.ElapsedMilliseconds, request);
+                _logger.LogWarning("Request Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}", name, _timer.ElapsedMilliseconds, request);
             }
 
             return response;

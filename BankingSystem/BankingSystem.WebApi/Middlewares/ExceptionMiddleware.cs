@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using BankingSystem.Common;
 using BankingSystem.Common.Exceptions;
+using BankingSystem.Persistence.Exceptions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BankingSystem.WebApi.Middlewares
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -20,33 +23,24 @@ namespace BankingSystem.WebApi.Middlewares
             _next = next;
         }
 
-        public Task Invoke(HttpContext httpContext)
+        public async Task Invoke(HttpContext httpContext)
         {
-
             try
             {
-                return _next(httpContext);
+                await _next(httpContext);
             }
             catch (Exception ex)
             {
                 HandleError(httpContext, ex);
             }
-
-            return Task.CompletedTask;
-        }
-
-        private void HandleManagedError(HttpContext httpContext, BankingException managedException)
-        {
-            string accountNumber = ExtractAccountNumber(httpContext);
-            managedException.ErrorDetails.AccountNumber = accountNumber;
-
-            httpContext.Response.WriteAsync(managedException.ErrorDetails.ToString());
         }
 
         private void HandleError(HttpContext httpContext, Exception exception)
         {
             string accountNumber = ExtractAccountNumber(httpContext);
             ErrorDetails errorDetails = new ErrorDetails(exception.Message) { AccountNumber = accountNumber };
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            httpContext.Response.ContentType = "application/json";
 
             httpContext.Response.WriteAsync(errorDetails.ToString());
         }

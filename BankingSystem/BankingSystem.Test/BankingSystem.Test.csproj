@@ -7,9 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.Validators.UnitTestExtension" Version="1.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.0" />
+    <PackageReference Include="NBuilder" Version="6.0.0" />
     <PackageReference Include="nunit" Version="3.10.1" />
+    <PackageReference Include="NUnit.Runners" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="Shouldly" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankingSystem.Application\BankingSystem.Application.csproj" />
+    <ProjectReference Include="..\BankingSystem.Infrastructure\BankingSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\BankingSystem.Persistence\BankingSystem.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

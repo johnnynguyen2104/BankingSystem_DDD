@@ -34,15 +34,15 @@ namespace BankingSystem.Persistence
                 a3 = 3;
 
             modelBuilder.Entity<BankAccount>().HasData(
-                new BankAccount() { Id = a1, AccountNumber = "4111111111111111", IsActive = true, Currency = "THB"  },
-                new BankAccount() { Id = a2, AccountNumber = "4222222222222222", IsActive = true, Currency = "THB" },
-                new BankAccount() { Id = a3, AccountNumber = "4333333333333333", IsActive = true, Currency = "THB" }
+                new BankAccount() { Id = a1, AccountNumber = "1", IsActive = true, Currency = "THB"  },
+                new BankAccount() { Id = a2, AccountNumber = "2", IsActive = true, Currency = "THB" },
+                new BankAccount() { Id = a3, AccountNumber = "3", IsActive = true, Currency = "THB" }
                 );
 
             modelBuilder.Entity<AccountTransaction>().HasData(
-                new AccountTransaction() { AccountId = a1, Id= 1, Action = ActionCode.Deposit, Amount = 100, Note = "This is the initial deposit."  },
-                new AccountTransaction() { AccountId = a2, Id= 2, Action = ActionCode.Deposit, Amount = 200, Note = "This is the initial deposit."  },
-                new AccountTransaction() { AccountId = a3, Id= 3, Action = ActionCode.Deposit, Amount = 300, Note = "This is the initial deposit."  }
+                new AccountTransaction() { AccountId = a1, Id= 10001, Action = ActionCode.Deposit, Amount = 100, Note = "This is the initial deposit."  },
+                new AccountTransaction() { AccountId = a2, Id= 10002, Action = ActionCode.Deposit, Amount = 200, Note = "This is the initial deposit."  },
+                new AccountTransaction() { AccountId = a3, Id= 10003, Action = ActionCode.Deposit, Amount = 300, Note = "This is the initial deposit."  }
                );
 
             modelBuilder.Entity<AccountStatement>().HasData(

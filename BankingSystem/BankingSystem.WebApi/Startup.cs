@@ -54,17 +54,22 @@ namespace BankingSystem.WebApi
             //Infrastructure
             services.AddTransient<ICurrencyService, CurrencyService>();
             services.AddTransient<IDateTime, MachineDateTime>();
+
+            //validations
+            //services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app
             , IHostingEnvironment env
-            , ILoggerFactory loggerFactory)
+            , ILoggerFactory loggerFactory
+            )
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
 
             env.ConfigureNLog("nlog.config");
 
@@ -76,7 +81,6 @@ namespace BankingSystem.WebApi
             app.AddNLogWeb();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseSwaggerUi3(settings =>
@@ -87,12 +91,7 @@ namespace BankingSystem.WebApi
 
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
         }
     }
 }

@@ -9,13 +9,13 @@ namespace BankingSystem.Common
     {
         public string AccountNumber { get; set; }
 
-        private bool Successful { get; set; }
+        public bool Successful { get;}
 
-        private decimal? Balance { get; set; }
+        public decimal? Balance { get; }
 
-        private string Currency { get; set; }
+        public string Currency { get; }
 
-        private string Message { get; set; }
+        public string Message { get; set; }
 
         public ErrorDetails(string mess)
         {
