@@ -3,23 +3,25 @@
 
 ## Introduction
 
-This is a simple Banking system, I just base on some main functionals such as Balance, Withdraw, Deposit.
+This is a Banking system base CQRS design. This project I focus on some basic functionalities such as Balance, Withdraw, Deposit.
 
 ## Objectives
 
-I designed the architecture for this project base on 3 Layers pattern, Repository and OOD (SOLID). Moreover, this project represent for solving the concurrency problem and adapt some non-functional requirements such as:
+I designed the architecture for this project base on CQRS(Command Query Responsibility Segregation), Repository pattern and few software principals such as SOLID, Seperate of concern. Moreover, this project represent for solving the concurrency problem and adapt some non-functional requirements such as:
 
 1. Maintainability.
 2. Readability.
 3. Testability.
+4. Performance.
+5. Scalable
 
-## How Far That I Got ?
+## How Far That I've Gotten ?
 
-I finished almost everythings and the thing that I missed is create a feature on client project to request to API in an automatic and random fashion with a combination of withdraws and deposits taking place over a given period of time to prove that the API can handle Concurrency problem.
+I completed the test's requirements.
 
 ## Technologies
 
-Asp.Net WebAPI 2, Entity Framework, Nunit, MOQ, NBuilder, Shouldly. 
+ASP.Net Core, Entity Framework Core, FluentValidations, MediatR, Nunit, NBuilder, Shouldly, Sql Server. 
 
 ## How to build code
 
