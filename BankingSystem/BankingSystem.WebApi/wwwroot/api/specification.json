@@ -1,0 +1,203 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Banking API",
+    "description" : "This is a Banking API",
+    "contact" : {
+      "email" : "johnny@gmail.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://virtserver.swaggerhub.com/johnnynguyen2104/BankingSystem/1.0.0",
+    "description" : "SwaggerHub API Auto Mocking"
+  } ],
+  "tags" : [ {
+    "name" : "APIs"
+  } ],
+  "paths" : {
+    "/api/account/balance" : {
+      "get" : {
+        "tags" : [ "APIs" ],
+        "summary" : "Inquiry balance",
+        "description" : "By passing in the appropriate options, you can inquiry for\navailable inventory in the system\n",
+        "operationId" : "balance",
+        "parameters" : [ {
+          "name" : "accountNumber",
+          "in" : "query",
+          "description" : "account number",
+          "required" : true,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "account information",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BankingOkResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/account/deposit" : {
+      "post" : {
+        "tags" : [ "APIs" ],
+        "summary" : "Deposit money",
+        "description" : "deposit money to bank account",
+        "operationId" : "deposit",
+        "requestBody" : {
+          "description" : "Deposit",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BankingRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "deposit successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BankingOkResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Exception",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BankingBadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/account/withdraw" : {
+      "post" : {
+        "tags" : [ "APIs" ],
+        "summary" : "Withdraw money",
+        "description" : "Withdraw money from bank account",
+        "operationId" : "withdraw",
+        "requestBody" : {
+          "description" : "Withdraw",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BankingRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "withdraw successfully",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BankingOkResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Exception",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BankingBadResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "BankingOkResponse" : {
+        "type" : "object",
+        "properties" : {
+          "accountNumber" : {
+            "type" : "string",
+            "example" : "1"
+          },
+          "successful" : {
+            "type" : "boolean",
+            "example" : true
+          },
+          "balance" : {
+            "type" : "string",
+            "example" : "100"
+          },
+          "currency" : {
+            "type" : "string",
+            "example" : "THB"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BankingBadResponse" : {
+        "type" : "object",
+        "properties" : {
+          "accountNumber" : {
+            "type" : "string"
+          },
+          "successful" : {
+            "type" : "boolean",
+            "example" : false
+          },
+          "balance" : {
+            "type" : "string"
+          },
+          "currency" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string",
+            "example" : "Fail Message"
+          }
+        }
+      },
+      "BankingRequest" : {
+        "required" : [ "accountNumber", "amount", "currency" ],
+        "type" : "object",
+        "properties" : {
+          "accountNumber" : {
+            "type" : "string",
+            "example" : "1"
+          },
+          "amount" : {
+            "type" : "string",
+            "example" : "100"
+          },
+          "currency" : {
+            "type" : "string",
+            "example" : "THB"
+          }
+        }
+      }
+    }
+  }
+}

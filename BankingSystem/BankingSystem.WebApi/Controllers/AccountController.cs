@@ -22,10 +22,11 @@ namespace BankingSystem.WebApi.Controllers
             _logger = logger;
         }
 
-        [Route("/api/account/balance")]
+        [Route("/api/account/balance/{AccountNumber}")]
         [ProducesResponseType(typeof(IEnumerable<InquiryViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Inquiry([FromQuery] InquiryByAccountNumberQuery query)
+        public async Task<IActionResult> Inquiry(string AccountNumber)
         {
+            InquiryByAccountNumberQuery query = new InquiryByAccountNumberQuery() { AccountNumber = AccountNumber };
             return Ok(await Mediator.Send(query));
         }
 

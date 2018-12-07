@@ -48,6 +48,7 @@ namespace BankingSystem.WebApi.Middlewares
         private string ExtractAccountNumber(HttpContext httpContext)
         {
             string code = "accountnumber";
+
             //from queries
             foreach (var item in httpContext.Request.Query)
             {
@@ -57,13 +58,17 @@ namespace BankingSystem.WebApi.Middlewares
                 }
             }
 
-            foreach (var item in httpContext.Request.Form)
+            if (httpContext.Request.HasFormContentType)
             {
-                if (item.Key.ToLower() == code)
+                foreach (var item in httpContext.Request.Form)
                 {
-                    return item.Value;
+                    if (item.Key.ToLower() == code)
+                    {
+                        return item.Value;
+                    }
                 }
             }
+         
 
             return null;
         }
