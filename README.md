@@ -41,7 +41,7 @@ ASP.Net Core, Entity Framework Core, FluentValidations, MediatR, Nunit, NBuilder
      ```
      dotnet run
      ```
-  6. Once the front end has started, within the `BankingSystem\BankingSystem.ClientTest` directory, launch the client console app by running:
+  6. Once the WebApi has started, within the `BankingSystem\BankingSystem.ClientTest` directory, launch the client console app by running:
      ```
 	 dotnet run
 	 ```
