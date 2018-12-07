@@ -15,7 +15,7 @@ I designed the architecture for this project base on CQRS(Command Query Responsi
 4. Performance.
 5. Scalable
 
-## How Far That I've Gotten ?
+## How Far Did I Get?
 
 I completed the test's requirements.
 
