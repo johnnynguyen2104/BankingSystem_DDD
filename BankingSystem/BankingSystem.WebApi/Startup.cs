@@ -12,6 +12,7 @@ using BankingSystem.Infrastructure;
 using BankingSystem.Persistence;
 using MediatR;
 using MediatR.Pipeline;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,9 @@ using NLog.Extensions.Logging;
 using NLog.Web;
 using BankingSystem.WebApi.Middlewares;
 using BankingSystem.Application.BankAccounts.Commands;
+using Microsoft.AspNetCore.Mvc;
+using BankingSystem.Application.BankAccounts.Validations;
+using FluentValidation;
 
 namespace BankingSystem.WebApi
 {
@@ -38,7 +42,9 @@ namespace BankingSystem.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc()
+              .AddFluentValidation();
+
             services.AddDbContext<BankingSystemDbContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -56,7 +62,13 @@ namespace BankingSystem.WebApi
             services.AddTransient<IDateTime, MachineDateTime>();
 
             //validations
-            //services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>());
+          
+
+
+            services.AddTransient<IValidator<DepositCommand>, DepositCommandValidation>();
+            services.AddTransient<IValidator<WithdrawCommand>, WithdrawCommandValidation>();
+            services.AddTransient<IValidator<InquiryByAccountNumberQuery>, InquiryByAccountNumberValidations>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

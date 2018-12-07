@@ -33,21 +33,21 @@ namespace BankingSystem.WebApi.Controllers
         [HttpPost]
         [Route("/api/account/withdraw")]
         [ProducesResponseType(typeof(IEnumerable<InquiryViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Withdraw([FromQuery] WithdrawCommand command)
+        public async Task<IActionResult> Withdraw([FromBody] WithdrawCommand command)
         {
             await Mediator.Send(command);
             var query = new InquiryByAccountNumberQuery() { AccountNumber = command.AccountNumber };
-            return Ok(Mediator.Send(query));
+            return Ok(await Mediator.Send(query));
         }
 
         [HttpPost]
         [Route("/api/account/deposit")]
         [ProducesResponseType(typeof(IEnumerable<InquiryViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Deposit([FromQuery] DepositCommand command)
+        public async Task<IActionResult> Deposit([FromBody] DepositCommand command)
         {
             await Mediator.Send(command);
             var query = new InquiryByAccountNumberQuery() { AccountNumber = command.AccountNumber };
-            return Ok(Mediator.Send(query));
+            return Ok(await Mediator.Send(query));
         }
     }
 }
