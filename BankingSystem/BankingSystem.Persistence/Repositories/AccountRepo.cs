@@ -68,9 +68,6 @@ namespace BankingSystem.Persistence.Repositories
             var currentBalance = (latestStatement.ClosingBalance + depositAmountFromLatestStatement) 
                                 - withdrawAmountFromLatestStatement;
 
-            account.LastActivityDate = _machineDateTime.Now;
-
-            _bankingSystemDbContext.SaveChanges();
 
             return currentBalance;
         }

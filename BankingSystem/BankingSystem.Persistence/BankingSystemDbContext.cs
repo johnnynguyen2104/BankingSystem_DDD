@@ -40,9 +40,9 @@ namespace BankingSystem.Persistence
                 );
 
             modelBuilder.Entity<AccountTransaction>().HasData(
-                new AccountTransaction() { AccountId = a1, Id= 10001, Action = ActionCode.Deposit, Amount = 100, Note = "This is the initial deposit."  },
-                new AccountTransaction() { AccountId = a2, Id= 10002, Action = ActionCode.Deposit, Amount = 200, Note = "This is the initial deposit."  },
-                new AccountTransaction() { AccountId = a3, Id= 10003, Action = ActionCode.Deposit, Amount = 300, Note = "This is the initial deposit."  }
+                new AccountTransaction() { AccountId = a1, Id= 1, Action = ActionCode.Deposit, Amount = 100, Note = "This is the initial deposit."  },
+                new AccountTransaction() { AccountId = a2, Id= 2, Action = ActionCode.Deposit, Amount = 200, Note = "This is the initial deposit."  },
+                new AccountTransaction() { AccountId = a3, Id= 3, Action = ActionCode.Deposit, Amount = 300, Note = "This is the initial deposit."  }
                );
 
             modelBuilder.Entity<AccountStatement>().HasData(

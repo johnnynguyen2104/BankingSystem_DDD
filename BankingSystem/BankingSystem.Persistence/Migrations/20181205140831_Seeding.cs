@@ -39,17 +39,17 @@ namespace BankingSystem.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Transactions",
                 columns: new[] { "Id", "AccountId", "Action", "Amount", "Note" },
-                values: new object[] { 10001, 1, "Deposit", 100m, "This is the initial deposit." });
+                values: new object[] { 1, 1, "Deposit", 100m, "This is the initial deposit." });
 
             migrationBuilder.InsertData(
                 table: "Transactions",
                 columns: new[] { "Id", "AccountId", "Action", "Amount", "Note" },
-                values: new object[] { 10002, 2, "Deposit", 200m, "This is the initial deposit." });
+                values: new object[] { 2, 2, "Deposit", 200m, "This is the initial deposit." });
 
             migrationBuilder.InsertData(
                 table: "Transactions",
                 columns: new[] { "Id", "AccountId", "Action", "Amount", "Note" },
-                values: new object[] { 10003, 3, "Deposit", 300m, "This is the initial deposit." });
+                values: new object[] { 3, 3, "Deposit", 300m, "This is the initial deposit." });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

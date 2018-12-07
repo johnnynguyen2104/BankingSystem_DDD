@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BankingSystem.Client
@@ -16,10 +17,12 @@ namespace BankingSystem.Client
         {
             do
             {
+                Console.Clear();
                 Console.WriteLine("1.Balance");
                 Console.WriteLine("2.Deposit");
                 Console.WriteLine("3.Withdraw");
-                Console.WriteLine("4.Clear");
+                Console.WriteLine("4.Test Concurrency (This client will request 3 withdraw and 3 deposit request async-ly)");
+                Console.WriteLine("5.Clear");
 
                 var input = int.Parse(Console.ReadLine());
 
@@ -28,7 +31,7 @@ namespace BankingSystem.Client
                     case 1:
                         Console.WriteLine("Please input your Account Number.");
                         var accountNumber = int.Parse(Console.ReadLine());
-                        var task = GetApi("api/account/balance?accountNumber=" + accountNumber);
+                        var task = GetApi("api/account/balance/" + accountNumber);
                         task.Wait();
                         Console.WriteLine(task.Result);
                         break;
@@ -49,6 +52,20 @@ namespace BankingSystem.Client
                         Console.WriteLine(taskW.Result);
                         break;
                     case 4:
+                        RequestInfo concurrencyRq = new RequestInfo() { AccountNumber = 1, Amount = 1m, Currency = "THB" };
+
+
+                        var cb = GetApi("api/account/balance/1");
+                        cb.Wait();
+                        Console.WriteLine("Current balance before test : " + cb.Result);
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            var task2 = CallPostApi("api/Account/deposit", concurrencyRq, "D");
+                            var task1 = CallPostApi("api/Account/withdraw", concurrencyRq, "W");
+                        }
+                        break;
+                    case 5:
                         Console.Clear();
                         break;
                     default:
@@ -76,7 +93,7 @@ namespace BankingSystem.Client
             }
         }
 
-        public async static Task<string> CallPostApi(string url, object jsonRequest)
+        public async static Task<string> CallPostApi(string url, object jsonRequest, string prefix = "")
         {
             using (var client = new HttpClient())
             {
@@ -87,8 +104,12 @@ namespace BankingSystem.Client
                 // New code:
                 HttpResponseMessage response = await client.PostAsJsonAsync(url, jsonRequest);
 
+                var result = await response.Content.ReadAsStringAsync();
+
+                Console.WriteLine($"{prefix}---{result}");
+                Console.WriteLine("----------------------");
                 //return Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseAccountInfo>(response.Content.ReadAsStringAsync().Result);
-                return response.Content.ReadAsStringAsync().Result;
+                return result;
             }
         }
     }
