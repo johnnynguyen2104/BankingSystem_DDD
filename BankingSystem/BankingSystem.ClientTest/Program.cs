@@ -100,8 +100,12 @@ namespace BankingSystem.ClientTest
 
                 var result = await response.Content.ReadAsStringAsync();
 
-                Console.WriteLine($"{prefix}---{result}");
-                Console.WriteLine("----------------------");
+                if (!string.IsNullOrEmpty(prefix))
+                {
+                    Console.WriteLine($"{prefix}---{result}");
+                    Console.WriteLine("----------------------");
+                }
+             
                 //return Newtonsoft.Json.JsonConvert.DeserializeObject<ResponseAccountInfo>(response.Content.ReadAsStringAsync().Result);
                 return result;
             }
