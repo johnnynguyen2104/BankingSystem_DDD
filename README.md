@@ -15,7 +15,7 @@ I designed the architecture for this project base on CQRS(Command Query Responsi
 4. Performance.
 5. Scalable
 
-## How Far That I've Gotten ?
+## How Far Did I Get?
 
 I completed the test's requirements.
 
@@ -26,23 +26,26 @@ ASP.Net Core, Entity Framework Core, FluentValidations, MediatR, Nunit, NBuilder
 ## How to build code
 
   1. Clone the repository (skip this step if you have the project on your machine)
-  2. At the root directory contains project's solution , restore required packages by running:
+  
+  2. Running EF Migration to create a test database, set active WepApi project and run update-database on Package Management Console with Persistent project as th target or you can use the backup file.  
+  
+  3. At the root directory contains project's solution , restore required packages by running:
      ```
      dotnet restore
      ```
-  3. Next, build the solution by running:
+  4. Next, build the solution by running:
      ```
      dotnet build
      ```
-  4. Next, within the `BankingSystem\BankingSystem.WebApi` directory, launch the Web API by running:
+  5. Next, within the `BankingSystem\BankingSystem.WebApi` directory, launch the Web API by running:
      ```
      dotnet run
      ```
-  5. Once the front end has started, within the `BankingSystem\BankingSystem.ClientTest` directory, launch the client console app by running:
+  6. Once the front end has started, within the `BankingSystem\BankingSystem.ClientTest` directory, launch the client console app by running:
      ```
 	 dotnet run
 	 ```
-  5. On the client console app, you can select a option to test.
+  7. On the client console app, you can select a option to test.
 
 ## What is concurrency problem ?
 
