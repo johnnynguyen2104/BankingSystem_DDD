@@ -15,6 +15,9 @@
   "servers" : [ {
     "url" : "https://virtserver.swaggerhub.com/johnnynguyen2104/BankingSystem/1.0.0",
     "description" : "SwaggerHub API Auto Mocking"
+  }, {
+    "url" : "http://localhost:63698",
+    "description" : "Local server"
   } ],
   "tags" : [ {
     "name" : "APIs"
@@ -35,7 +38,8 @@
           "explode" : true,
           "schema" : {
             "type" : "string"
-          }
+          },
+          "example" : "1"
         } ],
         "responses" : {
           "200" : {
@@ -188,9 +192,9 @@
             "type" : "string",
             "example" : "1"
           },
-          "amount" : {
-            "type" : "string",
-            "example" : "100"
+          "amount": {
+            "type": "string",
+            "example": "100"
           },
           "currency" : {
             "type" : "string",
