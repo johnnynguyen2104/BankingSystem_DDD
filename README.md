@@ -3,7 +3,7 @@
 
 ## Introduction
 
-This is a Banking system bases CQRS design. This project I focus on some basic functionalities such as Balance, Withdraw, Deposit.
+This is a Banking system base CQRS design. This project I focus on some basic functionalities such as Balance, Withdraw, Deposit.
 
 ## Objectives
 
