@@ -86,7 +86,7 @@ There are many improvement for this project following below:
 
 + Adding more document for all the layers.
 
-+ Completely seperate DbContext out of Application Layer.
++ Completely seperate DbContext out of Application Layer & Api.
 
 + Implement Authentication.
 
