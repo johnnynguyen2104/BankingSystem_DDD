@@ -17,10 +17,13 @@ namespace BankingSystem.WebApi.Middlewares
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next
+            , ILogger<ExceptionMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext httpContext)
@@ -41,6 +44,8 @@ namespace BankingSystem.WebApi.Middlewares
             ErrorDetails errorDetails = new ErrorDetails(exception.Message) { AccountNumber = accountNumber };
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             httpContext.Response.ContentType = "application/json";
+
+            _logger.LogError(errorDetails.Message);
 
             httpContext.Response.WriteAsync(errorDetails.ToString());
         }
