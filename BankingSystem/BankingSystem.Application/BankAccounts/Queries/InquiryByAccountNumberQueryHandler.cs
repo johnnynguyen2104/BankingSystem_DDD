@@ -2,6 +2,7 @@
 using BankingSystem.Application.BankAccounts.Models;
 using BankingSystem.Application.Interfaces;
 using BankingSystem.Common;
+using BankingSystem.Domain.Entities;
 using BankingSystem.Persistence;
 using BankingSystem.Persistence.Interfaces;
 using BankingSystem.Persistence.Repositories;
@@ -19,12 +20,13 @@ namespace BankingSystem.Application.BankAccounts.Queries
 
         private readonly BankingSystemDbContext _bankingSystemDbContext;
         private readonly IAccountRepository _accountRepository;
+        private readonly IDateTime _machineDateTime;
 
         public InquiryByAccountNumberQueryHandler(BankingSystemDbContext bankingSystemDbContext
             , IDateTime machineDateTime)
         {
             _bankingSystemDbContext = bankingSystemDbContext;
-
+            _machineDateTime = machineDateTime;
             _accountRepository = new AccountRepository(_bankingSystemDbContext, machineDateTime);
         }
 
@@ -40,10 +42,12 @@ namespace BankingSystem.Application.BankAccounts.Queries
                     throw new InquiryFailException($"Account Number - {request.AccountNumber} could not be found.");
                 }
 
+                var currentBalance = _accountRepository.GetCurrentBalanceByAccountId(account);
+
                 _bankingSystemDbContext.Transactions.Add(new AccountTransaction()
                 {
                     AccountId = account.Id,
-                    Amount = actualAmout,
+                    Amount = currentBalance,
                     Action = ActionCode.Inquiry,
                     TransactionDatetime = _machineDateTime.Now
                 });
@@ -57,7 +61,7 @@ namespace BankingSystem.Application.BankAccounts.Queries
                 {
                     AccountNumber = account.AccountNumber,
                     Currency = account.Currency,
-                    Balance = _accountRepository.GetCurrentBalanceByAccountId(account)
+                    Balance = currentBalance
                 };
 
             });
