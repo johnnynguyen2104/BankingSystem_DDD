@@ -5,15 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BankingSystem.Domain\BankingSystem.Domain.csproj" />
-    <ProjectReference Include="..\BankingSystem.Persistence\BankingSystem.Persistence.csproj" />
+    <Compile Remove="Transactions\**" />
+    <EmbeddedResource Remove="Transactions\**" />
+    <None Remove="Transactions\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Transactions\Models\" />
-    <Folder Include="Transactions\Commands\" />
-    <Folder Include="Transactions\Validations\" />
-    <Folder Include="Transactions\Queries\" />
+    <ProjectReference Include="..\BankingSystem.Domain\BankingSystem.Domain.csproj" />
+    <ProjectReference Include="..\BankingSystem.Persistence\BankingSystem.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

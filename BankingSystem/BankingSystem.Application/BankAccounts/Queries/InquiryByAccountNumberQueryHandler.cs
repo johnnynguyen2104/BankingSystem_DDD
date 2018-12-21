@@ -40,6 +40,19 @@ namespace BankingSystem.Application.BankAccounts.Queries
                     throw new InquiryFailException($"Account Number - {request.AccountNumber} could not be found.");
                 }
 
+                _bankingSystemDbContext.Transactions.Add(new AccountTransaction()
+                {
+                    AccountId = account.Id,
+                    Amount = actualAmout,
+                    Action = ActionCode.Inquiry,
+                    TransactionDatetime = _machineDateTime.Now
+                });
+
+                if (_bankingSystemDbContext.SaveChanges() <= 0)
+                {
+                    throw new InquiryFailException($"Inquiry fail with account number - {request.AccountNumber}.");
+                }
+
                 return new InquiryViewModel()
                 {
                     AccountNumber = account.AccountNumber,
