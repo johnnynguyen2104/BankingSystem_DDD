@@ -32,38 +32,33 @@ namespace BankingSystem.Application.BankAccounts.Queries
 
         public Task<InquiryViewModel> Handle(InquiryByAccountNumberQuery request, CancellationToken cancellationToken)
         {
-            return Task.Run(() => {
+            var account = _accountRepository.GetAccountByAccountNumber(request.AccountNumber);
 
+            if (account == null)
+            {
+                throw new InquiryFailException($"Account Number - {request.AccountNumber} could not be found.");
+            }
 
-                var account = _accountRepository.GetAccountByAccountNumber(request.AccountNumber);
+            var currentBalance = _accountRepository.GetCurrentBalanceByAccountId(account);
 
-                if (account == null)
-                {
-                    throw new InquiryFailException($"Account Number - {request.AccountNumber} could not be found.");
-                }
+            _bankingSystemDbContext.Transactions.Add(new AccountTransaction()
+            {
+                AccountId = account.Id,
+                Amount = currentBalance,
+                Action = ActionCode.Inquiry,
+                TransactionDatetime = _machineDateTime.Now
+            });
 
-                var currentBalance = _accountRepository.GetCurrentBalanceByAccountId(account);
+            if (_bankingSystemDbContext.SaveChanges() <= 0)
+            {
+                throw new InquiryFailException($"Inquiry fail with account number - {request.AccountNumber}.");
+            }
 
-                _bankingSystemDbContext.Transactions.Add(new AccountTransaction()
-                {
-                    AccountId = account.Id,
-                    Amount = currentBalance,
-                    Action = ActionCode.Inquiry,
-                    TransactionDatetime = _machineDateTime.Now
-                });
-
-                if (_bankingSystemDbContext.SaveChanges() <= 0)
-                {
-                    throw new InquiryFailException($"Inquiry fail with account number - {request.AccountNumber}.");
-                }
-
-                return new InquiryViewModel()
-                {
-                    AccountNumber = account.AccountNumber,
-                    Currency = account.Currency,
-                    Balance = currentBalance
-                };
-
+            return Task.FromResult(new InquiryViewModel()
+            {
+                AccountNumber = account.AccountNumber,
+                Currency = account.Currency,
+                Balance = currentBalance
             });
 
         }
